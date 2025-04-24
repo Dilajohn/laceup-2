@@ -1,95 +1,49 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Hero from '../components/Hero';
+import CategoryCard from '../components/CategoryCard';
+import ProductCard from '../components/ProductCard';
+import OfferBanner from '../components/OfferBanner';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <Hero />
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+      <section className="py-5 container">
+        <h3 className="fw-bold text-center mb-4">Shop by Category</h3>
+        <div className="d-flex flex-wrap justify-content-center gap-4">
+          <CategoryCard title="Sneakers" image="/categories/sneakers.jpg" />
+          <CategoryCard title="Boots" image="/categories/boots.jpg" />
+          <CategoryCard title="Everyday Kicks" image="/categories/everyday.jpg" />
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      <section className="py-5 container">
+        <h3 className="fw-bold text-center mb-4">Featured Products</h3>
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+          <div className="col">
+            <ProductCard title="Urban Runner Pro" price={129.99} image="/products/runner.jpg" />
+          </div>
+          <div className="col">
+            <ProductCard title="Classic Street" price={89.99} image="/products/classic.jpg" />
+          </div>
+          <div className="col">
+            <ProductCard title="Speed Boost Elite" price={159.99} image="/products/speed.jpg" />
+          </div>
+          <div className="col">
+            <ProductCard title="Daily Comfort Plus" price={99.99} image="/products/daily.jpg" />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-5 container">
+        <OfferBanner />
+      </section>
+    </>
   );
 }
+// This is a simple Next.js page that serves as the homepage for an e-commerce site.
+// It includes a hero section, a category section, a featured products section, and an offer banner.
+// The Hero component displays a promotional banner, while the CategoryCard and ProductCard components are used to display categories and products respectively.
+// The OfferBanner component is used to display a special offer or promotion.
+// The layout is responsive, using Bootstrap classes to ensure it looks good on all devices.
+// The page is styled using Bootstrap for a clean and modern look.

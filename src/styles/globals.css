@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  h1, h2, h3, h4 {
+    font-weight: bold;
+  }
+  
+
+.hero-background {
+    position: relative;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+  }
+
+  
