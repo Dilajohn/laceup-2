@@ -1,21 +1,25 @@
-'use client';
-import Image from 'next/image';
-import { Button } from 'react-bootstrap';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <div className="position-relative text-white" style={{ height: '60vh' }}>
-      <Image
-        src="/hero.jpg"
-        alt="Hero Background"
-        fill
-        className="object-fit-cover z-0"
-      />
-      <div className="position-absolute top-50 start-50 translate-middle text-center z-1">
-        <h1 className="fw-bold display-4">Step into Style</h1>
-        <p>Discover the perfect blend of comfort and fashion</p>
-        <Button variant="primary">Shop Now</Button>
+    <section
+      className="position-relative text-white"
+      style={{
+        backgroundImage: "url('/hero.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '60vh',
+      }}
+    >
+      <div className="container d-flex align-items-center h-100">
+        <div className="bg-dark bg-opacity-50 p-4 rounded">
+          <h1 className="fw-bold display-5">Step into Style</h1>
+          <p className="lead">Discover the perfect blend of comfort and fashion</p>
+          <Link href="/shop" className="btn btn-primary mt-2">
+            Shop Now
+          </Link>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

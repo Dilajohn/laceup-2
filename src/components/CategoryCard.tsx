@@ -1,16 +1,24 @@
 import Image from 'next/image';
 
-interface Props {
+interface CategoryCardProps {
   title: string;
   image: string;
 }
 
-export default function CategoryCard({ title, image }: Props) {
+export default function CategoryCard({ title, image }: CategoryCardProps) {
   return (
-    <div className="text-white text-center rounded overflow-hidden shadow-sm">
-      <Image src={image} alt={title} width={300} height={200} className="img-fluid" />
-      <div className="position-absolute top-50 start-50 translate-middle">
-        <h5 className="fw-bold">{title}</h5>
+    <div
+      className="position-relative rounded overflow-hidden"
+      style={{ width: 280, height: 200, cursor: 'pointer' }}
+    >
+      <Image
+        src={image}
+        alt={title}
+        fill
+        className="object-fit-cover"
+      />
+      <div className="position-absolute bottom-0 start-0 end-0 bg-dark bg-opacity-50 text-white p-2 text-center">
+        <h5 className="mb-0">{title}</h5>
       </div>
     </div>
   );
