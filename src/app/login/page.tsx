@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react';
 import { login, saveAuthToStorage } from '../../lib/auth';
 import { useRouter } from 'next/navigation';
