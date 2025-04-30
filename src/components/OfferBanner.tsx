@@ -13,7 +13,7 @@ export default function OfferBanner() {
       </div>
       <div className="col-md-6 position-relative" style={{ height: 220 }}>
         <Image
-          src="/offers.jpg"
+          src="/offer.jpg"
           alt="Limited Offer"
           fill
           className="object-fit-cover rounded"
