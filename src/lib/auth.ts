@@ -15,7 +15,7 @@ const STORAGE_USER_KEY = 'laceup_user';
  * @param password user's password
  * @returns object with auth token and user data
  */
-export async function login(email: string, password: string): Promise<{ token: string; user: User }> {
+export async function login(email: string): Promise<{ token: string; user: User }> {
   try {
     // TODO: Replace with actual API call for login/auth here
     // Simulating API delay
@@ -30,7 +30,7 @@ export async function login(email: string, password: string): Promise<{ token: s
         email,
       },
     };
-  } catch (error) {
+  } catch  {
     throw new Error('Login failed');
   }
 }
@@ -41,7 +41,7 @@ export async function login(email: string, password: string): Promise<{ token: s
  * @param password user's password
  * @returns object with auth token and user data
  */
-export async function register(email: string, password: string): Promise<{ token: string; user: User }> {
+export async function register(email: string): Promise<{ token: string; user: User }> {
   try {
     // TODO: Replace with actual registration API call
     await new Promise((r) => setTimeout(r, 500));
@@ -54,7 +54,7 @@ export async function register(email: string, password: string): Promise<{ token
         email,
       },
     };
-  } catch (error) {
+  } catch  {
     throw new Error('Registration failed');
   }
 }

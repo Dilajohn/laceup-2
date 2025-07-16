@@ -1,5 +1,3 @@
-// src/utils/api.ts
-
 import { getTokenFromStorage, logout } from '../lib/auth';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.laceup.com';
@@ -15,18 +13,20 @@ export async function apiFetch<T>(
 ): Promise<T> {
   const token = getTokenFromStorage();
 
-  const headers: HeadersInit = {
+  // Build headers as a plain object record
+  const headersObj: Record<string, string> = {
     'Content-Type': 'application/json',
-    ...(options.headers || {}),
+    // Only merge if options.headers is a plain object (ignore Headers instance or array)
+    ...(typeof options.headers === 'object' && !Array.isArray(options.headers) ? options.headers as Record<string, string> : {}),
   };
 
   if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
+    headersObj['Authorization'] = `Bearer ${token}`;
   }
 
   const config: RequestInit = {
     ...options,
-    headers,
+    headers: headersObj,
   };
 
   try {
@@ -47,8 +47,7 @@ export async function apiFetch<T>(
     }
 
     if (!response.ok) {
-      // Assumes API returns errors as { message: string } or string, adjust as needed
-      let errorMessage = typeof data === 'string' ? data : data?.message || response.statusText;
+      const errorMessage = typeof data === 'string' ? data : data?.message || response.statusText;
       throw new Error(errorMessage);
     }
 

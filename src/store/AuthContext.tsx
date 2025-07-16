@@ -1,8 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
-import { AuthState, User } from '../types/auth';
-import { getUserFromStorage, getTokenFromStorage, logout } from '../lib/auth';
+import React, { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
+import { getTokenFromStorage, getUserFromStorage, logout } from '../lib/auth';
+import { AuthState } from '../types/auth';
 
 interface AuthContextType {
   auth: AuthState;
