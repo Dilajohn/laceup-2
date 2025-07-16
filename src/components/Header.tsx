@@ -10,6 +10,9 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const cartItemCount = 2; // Replace with actual count from context/state
 
+  // Helper to determine active link class
+  const isActive = (path: string) => pathname === path ? 'text-primary' : 'text-dark';
+
   return (
     <header className="border-bottom bg-white shadow-sm sticky-top">
       <div className="container d-flex align-items-center justify-content-between py-3 flex-wrap">
@@ -36,15 +39,15 @@ export default function Header() {
 
         {/* Icons */}
         <nav aria-label="User navigation" className="d-flex align-items-center gap-3">
-          <Link href="/wishlist" aria-label="Wishlist" className="text-dark">
+          <Link href="/wishlist" aria-label="Wishlist" className={isActive('/wishlist')}>
             <FaHeart size={20} />
           </Link>
 
-          <Link href="/profile" aria-label="Profile" className="text-dark">
+          <Link href="/profile" aria-label="Profile" className={isActive('/profile')}>
             <FaUser size={20} />
           </Link>
 
-          <Link href="/cart" aria-label={`Shopping cart with ${cartItemCount} items`} className="text-dark position-relative">
+          <Link href="/cart" aria-label={`Shopping cart with ${cartItemCount} items`} className={`${isActive('/cart')} position-relative`}>
             <FaShoppingCart size={20} />
             {cartItemCount > 0 && (
               <span
@@ -60,4 +63,5 @@ export default function Header() {
     </header>
   );
 }
+
 

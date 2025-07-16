@@ -25,11 +25,14 @@ const mockProducts = [
 ];
 
 interface Props {
-  params: { id: string };
+  params: { id: string | string[] };
 }
 
 export default function ProductDetailPage({ params }: Props) {
-  const product = mockProducts.find((p) => p.id === params.id);
+  // Ensure id is string if string array provided by Next.js
+  const productId = Array.isArray(params.id) ? params.id[0] : params.id;
+
+  const product = mockProducts.find((p) => p.id === productId);
 
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [imageIndex, setImageIndex] = useState(0);
@@ -55,7 +58,6 @@ export default function ProductDetailPage({ params }: Props) {
               className="rounded object-cover"
               priority
             />
-            {/* Carousel Controls */}
             {product.images.length > 1 && (
               <>
                 <button
@@ -103,7 +105,12 @@ export default function ProductDetailPage({ params }: Props) {
             ))}
           </div>
 
-          <AddToCartButton productId={product.id} />
+          <AddToCartButton 
+          productId={product.id} 
+          title={product.title}
+          price={product.price}
+          image={product.images[0]}
+          />
 
           <button
             type="button"
