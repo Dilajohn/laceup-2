@@ -1,4 +1,3 @@
-
 import { notFound } from 'next/navigation';
 import AddToCartButton from '../../../components/AddToCartButton';
 import ProductImages from '../../../components/ProductImages';
@@ -26,7 +25,9 @@ interface Props {
   params: { id: string };
 }
 
-export default function ProductDetailPage({ params }: Props) {
+import React from 'react';
+
+export default async function ProductDetailPage({ params }: Props): Promise<React.ReactElement> {
   const product = mockProducts.find((p) => p.id === params.id);
 
   if (!product) return notFound();
