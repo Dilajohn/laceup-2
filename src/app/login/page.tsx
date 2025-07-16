@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState } from 'react';
 import { login, saveAuthToStorage } from '../../lib/auth';
@@ -8,34 +8,77 @@ import { useAuth } from '../../store/AuthContext';
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { setAuth } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { token, user } = await login(email, password);
-    saveAuthToStorage(token, user);
-    setAuth({ user, token });
-    router.push('/profile');
+    setError('');
+    setLoading(true);
+    try {
+      const { token, user } = await login(email, password);
+      saveAuthToStorage(token, user);
+      setAuth({ user, token });
+      router.push('/profile');
+    } catch {
+      setError('Invalid credentials. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="container py-5">
       <h2 className="mb-4">Login</h2>
-      <form onSubmit={handleSubmit} className="w-100" style={{ maxWidth: 400 }}>
+      <form onSubmit={handleSubmit} className="w-100" style={{ maxWidth: 400 }} noValidate>
         <div className="mb-3">
-          <label className="form-label">Email</label>
-          <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            className="form-control"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            aria-describedby="emailHelp"
+            aria-invalid={!!error}
+          />
         </div>
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <div className="mb-3 position-relative">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            id="password"
+            type={showPassword ? 'text' : 'password'}
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            aria-invalid={!!error}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            className="btn btn-sm btn-outline-secondary position-absolute top-50 end-0 translate-middle-y me-2"
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
+            tabIndex={-1}
+          >
+            {showPassword ? 'Hide' : 'Show'}
+          </button>
         </div>
-        <button className="btn btn-primary w-100" type="submit">Login</button>
+
+        {error && <div className="text-danger mb-3" role="alert">{error}</div>}
+
+        <button className="btn btn-primary w-100" type="submit" disabled={loading} aria-busy={loading}>
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
       </form>
     </div>
   );
 }
-// This is the login page of the application. It includes a form for users to enter their email and password.
-// Upon submission, it calls the login function, saves the authentication token and user data to local storage, 
-// and redirects to the profile page.

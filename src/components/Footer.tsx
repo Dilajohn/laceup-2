@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 
@@ -7,38 +9,60 @@ export default function Footer() {
       <div className="container">
         <div className="row">
           {/* About Us */}
-          <div className="col-md-3 mb-4">
-            <h6 className="fw-bold">About Us</h6>
+          <section className="col-md-3 mb-4" aria-labelledby="footer-about-heading">
+            <h6 id="footer-about-heading" className="fw-bold">About Us</h6>
             <p>Your premier destination for stylish and comfortable footwear.</p>
-          </div>
+          </section>
 
           {/* Quick Links */}
-          <div className="col-md-3 mb-4">
-            <h6 className="fw-bold">Quick Links</h6>
+          <nav className="col-md-3 mb-4" aria-labelledby="footer-links-heading">
+            <h6 id="footer-links-heading" className="fw-bold">Quick Links</h6>
             <ul className="list-unstyled">
-              <li><Link href="/shop" className="text-light text-decoration-none">Shop</Link></li>
-              <li><Link href="/about" className="text-light text-decoration-none">About</Link></li>
-              <li><Link href="/contact" className="text-light text-decoration-none">Contact</Link></li>
-              <li><Link href="/faqs" className="text-light text-decoration-none">FAQs</Link></li>
+              <li>
+                <Link href="/shop" legacyBehavior>
+                  <a className="text-light text-decoration-none">Shop</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" legacyBehavior>
+                  <a className="text-light text-decoration-none">About</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" legacyBehavior>
+                  <a className="text-light text-decoration-none">Contact</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/faqs" legacyBehavior>
+                  <a className="text-light text-decoration-none">FAQs</a>
+                </Link>
+              </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Contact */}
-          <div className="col-md-3 mb-4">
+          <address className="col-md-3 mb-4" aria-label="Contact Information">
             <h6 className="fw-bold">Contact Us</h6>
-            <p className="mb-1">📧 support@laceup.com</p>
-            <p>📞 +1 (555) 123-4567</p>
-          </div>
+            <p className="mb-1">📧 <a href="mailto:support@laceup.com" className="text-light text-decoration-none">support@laceup.com</a></p>
+            <p>📞 <a href="tel:+15551234567" className="text-light text-decoration-none">+1 (555) 123-4567</a></p>
+          </address>
 
           {/* Social */}
-          <div className="col-md-3 mb-4">
-            <h6 className="fw-bold">Follow Us</h6>
+          <section className="col-md-3 mb-4" aria-labelledby="footer-social-heading">
+            <h6 id="footer-social-heading" className="fw-bold">Follow Us</h6>
             <div className="d-flex gap-3">
-              <a href="#" className="text-light"><FaFacebook size={20} /></a>
-              <a href="#" className="text-light"><FaInstagram size={20} /></a>
-              <a href="#" className="text-light"><FaTwitter size={20} /></a>
+              <a href="#" className="text-light" aria-label="Facebook" rel="noopener noreferrer" target="_blank">
+                <FaFacebook size={20} />
+              </a>
+              <a href="#" className="text-light" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
+                <FaInstagram size={20} />
+              </a>
+              <a href="#" className="text-light" aria-label="Twitter" rel="noopener noreferrer" target="_blank">
+                <FaTwitter size={20} />
+              </a>
             </div>
-          </div>
+          </section>
         </div>
 
         <div className="text-center border-top border-light pt-3 mt-4">
@@ -48,3 +72,4 @@ export default function Footer() {
     </footer>
   );
 }
+
