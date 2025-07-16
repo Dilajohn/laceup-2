@@ -1,3 +1,5 @@
+// src/app/layout.tsx
+
 import type { Metadata } from 'next';
 import './globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,13 +14,10 @@ export const metadata: Metadata = {
   description: 'Premium footwear for every occasion',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head />
       <body className="d-flex flex-column min-vh-100">
         <AuthProvider>
           <CartProvider>
@@ -31,6 +30,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-// // This is the root layout of the application. It includes the header, footer, and wraps the main content with the AuthProvider.
-// // The AuthProvider manages the authentication state and provides it to the rest of the application. 
