@@ -1,20 +1,25 @@
 'use client';
 
+import { useCart } from '../context/CartContext';
+
 interface Props {
   productId: string;
+  title: string;
+  price: number;
+  image: string;
 }
 
-export default function AddToCartButton({ productId }: Props) {
+export default function AddToCartButton({ productId, title, price, image }: Props) {
+  const { addToCart } = useCart();
+
   const handleAdd = () => {
-    // Later: Connect to cart context or Redux store
-    alert(`Product ${productId} added to cart!`);
+    addToCart({ id: productId, title, price, image }, 1);
+    // Optionally, show toast notification here
   };
 
   return (
-    <button onClick={handleAdd} className="btn btn-primary w-100">
+    <button onClick={handleAdd} className="btn btn-primary w-100" aria-label={`Add ${title} to cart`}>
       Add to Cart
     </button>
   );
 }
-// This button will later be connected to the cart context or Redux store
-// to manage the cart state. For now, it just shows an alert when clicked.  
