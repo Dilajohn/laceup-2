@@ -25,7 +25,7 @@ const mockProducts = [
 ];
 
 interface Props {
-  params: { id: string | string[] };
+  params: Record<string, string | string[]>;
 }
 
 export default function ProductDetailPage({ params }: Props) {
