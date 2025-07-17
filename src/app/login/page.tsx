@@ -1,8 +1,8 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { login, saveAuthToStorage } from '../../lib/auth';
-import { useRouter } from 'next/navigation';
 import { useAuth } from '../../store/AuthContext';
 
 export default function LoginPage() {
@@ -19,6 +19,7 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
+      // Call login with two separate arguments: email and password
       const { token, user } = await login(email, password);
       saveAuthToStorage(token, user);
       setAuth({ user, token });
@@ -45,7 +46,6 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            aria-describedby="emailHelp"
             aria-invalid={!!error}
           />
         </div>
@@ -73,12 +73,23 @@ export default function LoginPage() {
           </button>
         </div>
 
-        {error && <div className="text-danger mb-3" role="alert">{error}</div>}
+        {error && (
+          <div className="text-danger mb-3" role="alert">
+            {error}
+          </div>
+        )}
 
-        <button className="btn btn-primary w-100" type="submit" disabled={loading} aria-busy={loading}>
+        <button
+          className="btn btn-primary w-100"
+          type="submit"
+          disabled={loading}
+          aria-busy={loading}
+        >
           {loading ? 'Logging in...' : 'Login'}
         </button>
       </form>
     </div>
   );
 }
+
+

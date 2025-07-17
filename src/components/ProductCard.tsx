@@ -7,7 +7,7 @@ interface ProductCardProps {
   title: string;
   price: number;
   image: string;
-  onAddToCart?: () => void;
+  onAddToCart?: () => void | Promise<void>;
   loading?: boolean;
   children?: ReactNode;
 }
@@ -25,17 +25,16 @@ export default function ProductCard({
   const handleAddToCart = () => {
     if (onAddToCart) {
       setIsLoading(true);
-      const maybePromise = onAddToCart();
-      if (maybePromise instanceof Promise) {
-        maybePromise.finally(() => setIsLoading(false));
-      } else {
-        setIsLoading(false);
-      }
+      Promise.resolve(onAddToCart()).finally(() => setIsLoading(false));
     }
   };
 
   return (
-    <div className="card h-100 shadow-sm transform-transition" tabIndex={0} aria-label={`Product card for ${title}`}>
+    <div
+      className="card h-100 shadow-sm transform-transition"
+      tabIndex={0}
+      aria-label={`Product card for ${title}`}
+    >
       <div style={{ position: 'relative', height: 180 }} className="rounded-top overflow-hidden">
         <Image
           src={image}
@@ -67,7 +66,7 @@ export default function ProductCard({
         .transform-transition:hover,
         .transform-transition:focus-visible {
           transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
           outline: none;
         }
       `}</style>

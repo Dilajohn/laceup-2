@@ -1,5 +1,3 @@
-// src/lib/auth.ts
-
 export interface User {
   id: string;
   name: string;
@@ -12,10 +10,17 @@ const STORAGE_USER_KEY = 'laceup_user';
 /**
  * Simulates login API call to authenticate user.
  * @param email user's email
- * @param password user's password
+ * @param _password user's password (currently unused)
  * @returns object with auth token and user data
  */
-export async function login(email: string): Promise<{ token: string; user: User }> {
+export async function login(
+  email: string,
+  password: string,
+): Promise<{ token: string; user: User }> {
+  // Use _password to explicitly mark it as "used" by the code,
+  // satisfying ESLint's no-unused-vars rule without actual usage.
+  void password;
+
   try {
     // TODO: Replace with actual API call for login/auth here
     // Simulating API delay
@@ -30,7 +35,7 @@ export async function login(email: string): Promise<{ token: string; user: User 
         email,
       },
     };
-  } catch  {
+  } catch {
     throw new Error('Login failed');
   }
 }
@@ -38,10 +43,17 @@ export async function login(email: string): Promise<{ token: string; user: User 
 /**
  * Simulates user registration API call.
  * @param email user's email
- * @param password user's password
+ * @param _password user's password (currently unused)
  * @returns object with auth token and user data
  */
-export async function register(email: string): Promise<{ token: string; user: User }> {
+export async function register(
+  email: string,
+  _password: string,
+): Promise<{ token: string; user: User }> {
+  // Use _password to explicitly mark it as "used" by the code,
+  // satisfying ESLint's no-unused-vars rule without actual usage.
+  void _password;
+
   try {
     // TODO: Replace with actual registration API call
     await new Promise((r) => setTimeout(r, 500));
@@ -54,7 +66,7 @@ export async function register(email: string): Promise<{ token: string; user: Us
         email,
       },
     };
-  } catch  {
+  } catch {
     throw new Error('Registration failed');
   }
 }
@@ -97,3 +109,4 @@ export function logout(): void {
   localStorage.removeItem(STORAGE_TOKEN_KEY);
   localStorage.removeItem(STORAGE_USER_KEY);
 }
+

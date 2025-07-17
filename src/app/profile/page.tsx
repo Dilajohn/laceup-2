@@ -16,10 +16,11 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (auth.user) {
+      const { name, email } = auth.user;
       setUserInfo(prev => ({
         ...prev,
-        name: auth.user.name || '',
-        email: auth.user.email || '',
+        name: name || '',
+        email: email || '',
       }));
     }
   }, [auth.user]);
@@ -89,6 +90,4 @@ export default function ProfilePage() {
     </ProtectedRoute>
   );
 }
-// This code defines a ProfilePage component that allows users to update their profile information.
-//  It uses React's useState hook to manage the state of the user information and handles form submission with a simple alert. 
-// The form includes fields for full name, email, address, and phone number, all styled with Bootstrap classes.
+

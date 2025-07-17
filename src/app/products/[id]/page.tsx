@@ -3,9 +3,6 @@ import AddToCartButton from '../../../components/AddToCartButton';
 import ProductImages from '../../../components/ProductImages';
 import ProductSizes from '../../../components/ProductSizes';
 
-// Define Params type locally (Next.js does not export it)
-type Params = { [key: string]: string | string[] };
-
 const mockProducts = [
   {
     id: 'p1',
@@ -25,16 +22,15 @@ const mockProducts = [
   },
 ];
 
-type PageProps = {
-  params: Params;
-};
-
-export default function ProductDetailPage({ params }: PageProps) {
-  // Type narrowing, get string id (use first if array)
-  const productId = Array.isArray(params.id) ? params.id[0] : params.id;
+export default async function ProductDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const productId = params.id;
   const product = mockProducts.find((p) => p.id === productId);
 
-  if (!product) return notFound();
+  if (!product) notFound();
 
   return (
     <section className="container py-5">
@@ -42,7 +38,6 @@ export default function ProductDetailPage({ params }: PageProps) {
         <div className="col-md-6">
           <ProductImages images={product.images} title={product.title} />
         </div>
-
         <div className="col-md-6">
           <h2 className="fw-bold">{product.title}</h2>
           <p className="text-muted">{product.description}</p>
@@ -70,4 +65,11 @@ export default function ProductDetailPage({ params }: PageProps) {
     </section>
   );
 }
+
+
+
+
+
+
+
 
